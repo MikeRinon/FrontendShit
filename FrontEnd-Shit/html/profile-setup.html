@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TipidTech - Profile Setup</title>
+    <link rel="stylesheet" href="../css/homepage.css">
+    <link rel="stylesheet" href="../css/onboarding.css">
+</head>
+<body>
+    <section class="onboard-section">
+        <div class="onboard-header">
+            <div class="logo-mark">
+                <img src="../icons/pig-icon.png" alt="TipidTech" class="logo-img" />
+            </div>
+            <h1>Set Up Your Profile</h1>
+            <p class="subtitle">Help us personalize your budgeting experience</p>
+        </div>
+
+        <div class="progress-row">
+            <span class="step-label">Step 1 of 4</span>
+            <span class="percent">25% complete</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: 25%;"></div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>What describes you best?</h2>
+                <p>This helps us customize expense categories for you</p>
+            </div>
+            <div class="choices">
+                <label class="choice">
+                    <input type="radio" name="persona">
+                    <div class="choice-content">
+                        <div class="choice-icon"><img src="../icons/student-icon.png" alt="Student"></div>
+                        <div class="choice-title">Student</div>
+                        <div class="choice-sub">I'm currently studying</div>
+                    </div>
+                </label>
+                <label class="choice">
+                    <input type="radio" name="persona">
+                    <div class="choice-content">
+                        <div class="choice-icon"><img src="../icons/job-icon.png" alt="Working Professional"></div>
+                        <div class="choice-title">Working Professional</div>
+                        <div class="choice-sub">I have a regular income</div>
+                    </div>
+                </label>
+            </div>
+
+            <div class="actions">
+                <button class="btn-ghost" onclick="window.location.href='signup.html'">← Back</button>
+                <button class="btn-primary" onclick="validateAndContinue()">Continue →</button>
+            </div>
+        </div>
+    </section>
+    <script>
+        function validateAndContinue() {
+            const selected = document.querySelector('input[name="persona"]:checked');
+            if (!selected) {
+                alert('Please select an option before continuing.');
+                return;
+            }
+            window.location.href = 'profile-setup-step2.html';
+        }
+    </script>
+</body>
+</html>

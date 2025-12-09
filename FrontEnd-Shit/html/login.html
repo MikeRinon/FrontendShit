@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TipidTech - Sign In</title>
+    <link rel="stylesheet" href="../css/homepage.css">
+    <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+    <section class="login-section">
+        <button class="login-back" onclick="window.location.href='index.html'">
+            <span class="arrow-left">←</span>
+            Back to home
+        </button>
+        <div class="login-container">
+            <div class="login-logo">
+                <div class="login-logo-mark">
+                    <img src="../icons/pig-icon.png" alt="TipidTech" />
+                </div>
+                <h2>TipidTech</h2>
+                <p>AI Budget Planner</p>
+            </div>
+
+            <div class="login-card">
+                <h3>Welcome back</h3>
+                <p class="login-subtitle">Sign in to continue managing your budget</p>
+
+                <button class="social-btn google">
+                    <img src="../icons/google-icon.png" alt="Google" class="social-icon-img">
+                    Continue with Google
+                </button>
+                <button class="social-btn facebook">
+                    <img src="../icons/facebook-icon.png" alt="Facebook" class="social-icon-img">
+                    Continue with Facebook
+                </button>
+
+                <div class="divider">
+                    <span>OR CONTINUE WITH EMAIL</span>
+                </div>
+
+                <form class="login-form">
+                    <label>Email</label>
+                    <div class="input-field" id="emailField">
+                        <span class="input-icon"><img src="../icons/email-icon.png" alt="Email"></span>
+                        <input type="email" placeholder="you@example.com" id="emailInput" />
+                    </div>
+
+                    <label>Password</label>
+                    <div class="input-field" id="passwordField">
+                        <span class="input-icon"><img src="../icons/locked-icon.png" alt="Lock"></span>
+                        <input type="password" placeholder="Enter your password" id="passwordInput" />
+                    </div>
+
+                    <button type="button" class="btn signin-btn" onclick="validateLogin()">Sign In</button>
+                </form>
+
+                <p class="signup-prompt">Don't have an account? <a href="signup.html">Sign up</a></p>
+            </div>
+
+            <p class="terms">By continuing, you agree to our Terms of Service and Privacy Policy.</p>
+        </div>
+    </section>
+
+    <script>
+        function validateLogin() {
+            const emailInput = document.getElementById('emailInput');
+            const passwordInput = document.getElementById('passwordInput');
+            const emailField = document.getElementById('emailField');
+            const passwordField = document.getElementById('passwordField');
+            
+            let isValid = true;
+            
+            // Reset styles
+            emailField.style.border = '1px solid #e5e7eb';
+            passwordField.style.border = '1px solid #e5e7eb';
+            
+            // Validate email
+            if (!emailInput.value.trim()) {
+                emailField.style.border = '2px solid #ef4444';
+                isValid = false;
+            }
+            
+            // Validate password
+            if (!passwordInput.value.trim()) {
+                passwordField.style.border = '2px solid #ef4444';
+                isValid = false;
+            }
+            
+            // If valid, proceed to dashboard
+            if (isValid) {
+                window.location.href = 'dashboard.html';
+            }
+        }
+    </script>
+</body>
+</html>

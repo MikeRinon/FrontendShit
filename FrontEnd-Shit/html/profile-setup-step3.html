@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TipidTech - Profile Setup Step 3</title>
+    <link rel="stylesheet" href="../css/homepage.css">
+    <link rel="stylesheet" href="../css/onboarding.css">
+</head>
+<body>
+    <section class="onboard-section">
+        <div class="onboard-header">
+            <div class="logo-mark">
+                <img src="../icons/pig-icon.png" alt="TipidTech" class="logo-img" />
+            </div>
+            <h1>Set Up Your Profile</h1>
+            <p class="subtitle">Help us personalize your budgeting experience</p>
+        </div>
+
+        <div class="progress-row">
+            <span class="step-label">Step 3 of 4</span>
+            <span class="percent">75% complete</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: 75%;"></div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>What's your expected income?</h2>
+                <p>This will be your spending limit for the period</p>
+            </div>
+            
+            <div class="income-input-section">
+                <label class="income-label" id="incomeLabel">Total Expected Income (every 2 weeks)</label>
+                <div class="income-input-wrapper">
+                    <span class="currency-symbol">₱</span>
+                    <input 
+                        type="number" 
+                        class="income-input" 
+                        id="incomeInput"
+                        placeholder="0"
+                        min="0"
+                        step="100"
+                        list="income-suggestions"
+                    />
+                </div>
+                <datalist id="income-suggestions">
+                    <option value="5000">
+                    <option value="10000">
+                    <option value="15000">
+                    <option value="20000">
+                    <option value="25000">
+                    <option value="30000">
+                    <option value="50000">
+                </datalist>
+            </div>
+
+            <div class="spending-limit-display" id="spendingLimit" style="display: none;">
+                <p class="limit-text">Your spending limit will be</p>
+                <p class="limit-amount" id="limitAmount">₱0</p>
+                <p class="limit-period" id="limitPeriod">per 2 weeks</p>
+            </div>
+
+            <div class="actions">
+                <button class="btn-ghost" onclick="window.location.href='profile-setup-step2.html'">← Back</button>
+                <button class="btn-primary" onclick="validateAndContinue()">Continue →</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const incomeInput = document.getElementById('incomeInput');
+        const spendingLimit = document.getElementById('spendingLimit');
+        const limitAmount = document.getElementById('limitAmount');
+        const incomeLabel = document.getElementById('incomeLabel');
+        const limitPeriod = document.getElementById('limitPeriod');
+
+        // Load frequency from step 2
+        window.addEventListener('DOMContentLoaded', function() {
+            const frequency = localStorage.getItem('incomeFrequency') || 'Bi-weekly';
+            const period = localStorage.getItem('incomePeriod') || 'Every 2 weeks';
+            incomeLabel.textContent = `Total Expected Income (${period.toLowerCase()})`;
+            limitPeriod.textContent = `per ${period.toLowerCase().replace('every ', '')}`;
+        });
+
+        incomeInput.addEventListener('input', function() {
+            const value = parseFloat(this.value);
+            
+            if (value > 0) {
+                spendingLimit.style.display = 'block';
+                limitAmount.textContent = '₱' + value.toLocaleString('en-PH');
+            } else {
+                spendingLimit.style.display = 'none';
+            }
+        });
+
+        incomeInput.addEventListener('focus', function() {
+            this.classList.add('focused');
+        });
+
+        incomeInput.addEventListener('blur', function() {
+            this.classList.remove('focused');
+        });
+
+        function validateAndContinue() {
+            const value = parseFloat(incomeInput.value);
+            if (!value || value <= 0) {
+                alert('Please enter your expected income before continuing.');
+                return;
+            }
+            localStorage.setItem('expectedIncome', value);
+            window.location.href = 'profile-setup-step4.html';
+        }
+    </script>
+</body>
+</html>

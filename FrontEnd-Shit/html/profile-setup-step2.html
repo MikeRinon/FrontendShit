@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TipidTech - Profile Setup Step 2</title>
+    <link rel="stylesheet" href="../css/homepage.css">
+    <link rel="stylesheet" href="../css/onboarding.css">
+</head>
+<body>
+    <section class="onboard-section">
+        <div class="onboard-header">
+            <div class="logo-mark">
+                <img src="../icons/pig-icon.png" alt="TipidTech" class="logo-img" />
+            </div>
+            <h1>Set Up Your Profile</h1>
+            <p class="subtitle">Help us personalize your budgeting experience</p>
+        </div>
+
+        <div class="progress-row">
+            <span class="step-label">Step 2 of 4</span>
+            <span class="percent">50% complete</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: 50%;"></div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>How often do you receive income?</h2>
+                <p>We'll align your budget cycle with your income</p>
+            </div>
+            <div class="choices choices-3col">
+                <label class="choice">
+                    <input type="radio" name="income-frequency">
+                    <div class="choice-content">
+                        <div class="choice-icon"><img src="../icons/calendar-icon.png" alt="Weekly"></div>
+                        <div class="choice-title">Weekly</div>
+                        <div class="choice-sub">Every week</div>
+                    </div>
+                </label>
+                <label class="choice">
+                    <input type="radio" name="income-frequency">
+                    <div class="choice-content">
+                        <div class="choice-icon"><img src="../icons/calendar-icon.png" alt="Bi-weekly"></div>
+                        <div class="choice-title">Bi-weekly</div>
+                        <div class="choice-sub">Every 2 weeks</div>
+                    </div>
+                </label>
+                <label class="choice">
+                    <input type="radio" name="income-frequency">
+                    <div class="choice-content">
+                        <div class="choice-icon"><img src="../icons/calendar-icon.png" alt="Monthly"></div>
+                        <div class="choice-title">Monthly</div>
+                        <div class="choice-sub">Every month</div>
+                    </div>
+                </label>
+            </div>
+
+            <div class="actions">
+                <button class="btn-ghost" onclick="window.location.href='profile-setup.html'">← Back</button>
+                <button class="btn-primary" onclick="validateAndContinue()">Continue →</button>
+            </div>
+        </div>
+    </section>
+    <script>
+        function validateAndContinue() {
+            const selected = document.querySelector('input[name="income-frequency"]:checked');
+            if (!selected) {
+                alert('Please select an option before continuing.');
+                return;
+            }
+            const frequency = selected.parentElement.querySelector('.choice-title').textContent;
+            const period = selected.parentElement.querySelector('.choice-sub').textContent;
+            localStorage.setItem('incomeFrequency', frequency);
+            localStorage.setItem('incomePeriod', period);
+            window.location.href = 'profile-setup-step3.html';
+        }
+    </script>
+</body>
+</html>

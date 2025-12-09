@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TipidTech - Create Account</title>
+    <link rel="stylesheet" href="../css/homepage.css">
+    <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+    <section class="signup-section">
+        <button class="signup-back" onclick="window.location.href='index.html'">
+            <span class="arrow-left">←</span>
+            Back to home
+        </button>
+        <div class="signup-container">
+            <div class="signup-logo">
+                <div class="signup-logo-mark">
+                    <img src="../icons/pig-icon.png" alt="TipidTech" />
+                </div>
+                <h2>TipidTech</h2>
+                <p>AI Budget Planner</p>
+            </div>
+
+            <div class="signup-card">
+                <h3>Create your account</h3>
+                <p class="signup-subtitle">Start your journey to financial freedom</p>
+
+                <button class="social-btn google">
+                    <img src="../icons/google-icon.png" alt="Google" class="social-icon-img">
+                    Continue with Google
+                </button>
+                <button class="social-btn facebook">
+                    <img src="../icons/facebook-icon.png" alt="Facebook" class="social-icon-img">
+                    Continue with Facebook
+                </button>
+
+                <div class="divider">
+                    <span>OR CONTINUE WITH EMAIL</span>
+                </div>
+
+                <form class="signup-form">
+                    <label>Username</label>
+                    <div class="input-field">
+                        <span class="input-icon"><img src="../icons/user-icon.png" alt="User"></span>
+                        <input type="text" placeholder="Choose a username" id="usernameInput" />
+                    </div>
+
+                    <label>Email</label>
+                    <div class="input-field">
+                        <span class="input-icon"><img src="../icons/email-icon.png" alt="Email"></span>
+                        <input type="email" placeholder="you@example.com" />
+                    </div>
+
+                    <label>Password</label>
+                    <div class="input-field">
+                        <span class="input-icon"><img src="../icons/locked-icon.png" alt="Lock"></span>
+                        <input type="password" placeholder="Enter your password" />
+                    </div>
+
+                    <label>Confirm Password</label>
+                    <div class="input-field">
+                        <span class="input-icon"><img src="../icons/locked-icon.png" alt="Lock"></span>
+                        <input type="password" placeholder="Confirm your password" />
+                    </div>
+
+                    <button type="button" class="btn create-account" onclick="createAccount()">Create Account</button>
+                </form>
+
+                <p class="signin-text">Already have an account? <a href="login.html">Sign in</a></p>
+            </div>
+
+            <p class="terms">By continuing, you agree to our Terms of Service and Privacy Policy.</p>
+        </div>
+    </section>
+    <script>
+        function createAccount() {
+            const usernameInput = document.getElementById('usernameInput');
+            const username = usernameInput ? usernameInput.value.trim() : '';
+
+            if (username) {
+                localStorage.setItem('userName', username);
+            }
+
+            window.location.href = 'profile-setup.html';
+        }
+    </script>
+</body>
+</html>

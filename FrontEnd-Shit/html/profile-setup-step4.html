@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TipidTech - Profile Setup Step 4</title>
+    <link rel="stylesheet" href="../css/homepage.css">
+    <link rel="stylesheet" href="../css/onboarding.css">
+</head>
+<body>
+    <section class="onboard-section">
+        <div class="onboard-header">
+            <div class="logo-mark">
+                <img src="../icons/pig-icon.png" alt="TipidTech" class="logo-img" />
+            </div>
+            <h1>Set Up Your Profile</h1>
+            <p class="subtitle">Help us personalize your budgeting experience</p>
+        </div>
+
+        <div class="progress-row">
+            <span class="step-label">Step 4 of 4</span>
+            <span class="percent">100% complete</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: 100%;"></div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>What's your main financial goal?</h2>
+                <p>We'll help you achieve this with AI-powered insights</p>
+            </div>
+            
+            <div class="goal-options">
+                <label class="goal-option">
+                    <input type="radio" name="financial-goal" value="Build Emergency Fund">
+                    <div class="goal-content">
+                        <span class="goal-text">Build Emergency Fund</span>
+                    </div>
+                </label>
+                
+                <label class="goal-option">
+                    <input type="radio" name="financial-goal" value="Save for a Big Purchase">
+                    <div class="goal-content">
+                        <span class="goal-text">Save for a Big Purchase</span>
+                    </div>
+                </label>
+                
+                <label class="goal-option">
+                    <input type="radio" name="financial-goal" value="Pay Off Debt">
+                    <div class="goal-content">
+                        <span class="goal-text">Pay Off Debt</span>
+                    </div>
+                </label>
+                
+                <label class="goal-option">
+                    <input type="radio" name="financial-goal" value="Start Investing">
+                    <div class="goal-content">
+                        <span class="goal-text">Start Investing</span>
+                    </div>
+                </label>
+                
+                <label class="goal-option">
+                    <input type="radio" name="financial-goal" value="General Savings">
+                    <div class="goal-content">
+                        <span class="goal-text">General Savings</span>
+                    </div>
+                </label>
+            </div>
+
+            <div class="target-amount-section" id="targetAmountSection" style="display: none;">
+                <label class="target-label">Target Amount (Optional)</label>
+                <div class="income-input-wrapper">
+                    <span class="currency-symbol">₱</span>
+                    <input 
+                        type="number" 
+                        class="income-input" 
+                        id="targetAmountInput"
+                        placeholder="e.g., 50,000"
+                        min="0"
+                        step="1000"
+                    />
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="btn-ghost" onclick="window.location.href='profile-setup-step3.html'">← Back</button>
+                <button class="btn-primary" onclick="validateAndComplete()">Complete Setup</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const goalOptions = document.querySelectorAll('input[name="financial-goal"]');
+        const targetAmountSection = document.getElementById('targetAmountSection');
+        const targetAmountInput = document.getElementById('targetAmountInput');
+
+        goalOptions.forEach(option => {
+            option.addEventListener('change', function() {
+                if (this.checked) {
+                    targetAmountSection.style.display = 'block';
+                }
+            });
+        });
+
+        function validateAndComplete() {
+            const selected = document.querySelector('input[name="financial-goal"]:checked');
+            if (!selected) {
+                alert('Please select a financial goal before completing setup.');
+                return;
+            }
+            
+            // Save goal data
+            localStorage.setItem('financialGoal', selected.value);
+            if (targetAmountInput.value) {
+                localStorage.setItem('targetAmount', targetAmountInput.value);
+            }
+            
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>

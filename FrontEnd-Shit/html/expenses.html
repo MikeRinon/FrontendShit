@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TipidTech - Expense Tracker</title>
+    <link rel="stylesheet" href="../css/homepage.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <div class="logo">
+                    <img src="../icons/pig-icon.png" alt="TipidTech" class="logo-icon-img">
+                    <span class="logo-text">TipidTech</span>
+                </div>
+                <nav class="nav-links">
+                    <a href="dashboard.html" class="nav-link">Dashboard</a>
+                    <a href="expenses.html" class="nav-link active">Expenses</a>
+                    <a href="#" class="nav-link">Goals</a>
+                    <a href="#" class="nav-link">Settings</a>
+                    <button class="btn-logout" onclick="confirmLogout()">Logout</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="dashboard expenses-page">
+        <div class="container">
+            <!-- Page Header -->
+            <section class="page-header">
+                <div>
+                    <h1>Expense Tracker</h1>
+                    <p class="page-subtitle">Track your daily spending</p>
+                </div>
+                <button class="btn-add-expense" id="addExpenseBtn">+ Add Expense</button>
+            </section>
+
+            <!-- Total Spent -->
+            <section class="total-spent-card">
+                <span class="total-label">Total Spent</span>
+                <span class="total-amount" id="totalSpentAmount">₱1,224</span>
+            </section>
+
+            <!-- Expenses List -->
+            <section class="expenses-list" id="expensesList">
+                <!-- Expenses will be grouped by date and added here dynamically -->
+            </section>
+        </div>
+    </main>
+
+    <!-- Add Expense Modal -->
+    <div class="modal-overlay" id="expenseModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Expense</h3>
+                <button class="modal-close" id="modalCloseBtn">✕</button>
+            </div>
+            <p class="modal-subtitle">Enter the details of your expense</p>
+
+            <form class="expense-form" id="expenseForm">
+                <div class="form-group">
+                    <label for="expenseAmount">Amount</label>
+                    <div class="amount-input-wrapper">
+                        <span class="peso-symbol">₱</span>
+                        <input type="number" id="expenseAmount" placeholder="0" min="0" step="1" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="expenseCategory">Category</label>
+                    <div class="category-select-wrapper">
+                        <button type="button" class="category-select" id="categorySelect">
+                            <span class="selected-category">
+                                <span class="category-icon"><img src="../icons/bus-icon.png" alt="Transportation"></span>
+                                <span class="category-name">Transportation</span>
+                            </span>
+                            <span class="dropdown-arrow">▼</span>
+                        </button>
+                        <div class="category-dropdown" id="categoryDropdown">
+                            <div class="category-option" data-value="transportation" data-icon="../icons/bus-icon.png">
+                                <span class="cat-check">✓</span>
+                                <span class="cat-icon"><img src="../icons/bus-icon.png" alt="Transportation"></span>
+                                <span class="cat-name">Transportation</span>
+                            </div>
+                            <div class="category-option" data-value="food" data-icon="../icons/dining-icon.png">
+                                <span class="cat-check"></span>
+                                <span class="cat-icon"><img src="../icons/dining-icon.png" alt="Food & Dining"></span>
+                                <span class="cat-name">Food & Dining</span>
+                            </div>
+                            <div class="category-option" data-value="bills" data-icon="../icons/house-icon.png">
+                                <span class="cat-check"></span>
+                                <span class="cat-icon"><img src="../icons/house-icon.png" alt="Bills & Utilities"></span>
+                                <span class="cat-name">Bills & Utilities</span>
+                            </div>
+                            <div class="category-option" data-value="shopping" data-icon="../icons/shop-icon.png">
+                                <span class="cat-check"></span>
+                                <span class="cat-icon"><img src="../icons/shop-icon.png" alt="Shopping"></span>
+                                <span class="cat-name">Shopping</span>
+                            </div>
+                            <div class="category-option" data-value="mobile" data-icon="../icons/device-icon.png">
+                                <span class="cat-check"></span>
+                                <span class="cat-icon"><img src="../icons/device-icon.png" alt="Mobile & Internet"></span>
+                                <span class="cat-name">Mobile & Internet</span>
+                            </div>
+                            <div class="category-option" data-value="healthcare" data-icon="../icons/heart-icon.png">
+                                <span class="cat-check"></span>
+                                <span class="cat-icon"><img src="../icons/heart-icon.png" alt="Healthcare"></span>
+                                <span class="cat-name">Healthcare</span>
+                            </div>
+                            <div class="category-option" data-value="entertainment" data-icon="../icons/games-icon.png">
+                                <span class="cat-check"></span>
+                                <span class="cat-icon"><img src="../icons/games-icon.png" alt="Entertainment"></span>
+                                <span class="cat-name">Entertainment</span>
+                            </div>
+                            <div class="category-option" data-value="other" data-icon="../icons/other-icon.png">
+                                <span class="cat-check"></span>
+                                <span class="cat-icon"><img src="../icons/other-icon.png" alt="Other"></span>
+                                <span class="cat-name">Other</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="expenseDate">Date</label>
+                    <input type="date" id="expenseDate" class="date-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="expenseDescription">Description (Optional)</label>
+                    <input type="text" id="expenseDescription" class="text-input" placeholder="What was this expense for?">
+                </div>
+
+                <button type="submit" class="btn-submit-expense">Add Expense</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- AI Chat Button -->
+    <button class="ai-chat-button" id="aiChatBtn" aria-label="Open AI Chat">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 9H16M8 13H14M6 21H18C19.1046 21 20 20.1046 20 19V5C20 3.89543 19.1046 3 18 3H6C4.89543 3 4 3.89543 4 5V19C4 20.1046 4.89543 21 6 21Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <!-- AI Chat Popup (reused from dashboard) -->
+    <div class="ai-chat-popup" id="aiChatPopup">
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <div class="chat-avatar">
+                    <img src="../icons/chatbot1-icon.png" alt="TipidTech AI">
+                </div>
+                <div class="chat-title">
+                    <h4>TipidTech AI</h4>
+                    <p>Your Budget Coach</p>
+                </div>
+            </div>
+            <button class="chat-close" id="chatCloseBtn" aria-label="Close chat">✕</button>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <div class="message ai-message">
+                <div class="message-avatar">
+                    <img src="../icons/chatbot2-icon.png" alt="AI">
+                </div>
+                <div class="message-content">
+                    <p>Hi! 👋 I can help you analyze your expenses and give budgeting advice. What would you like to know?</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="quick-actions">
+            <button class="quick-action-btn" onclick="sendQuickAction('Analyze my spending')">Analyze spending</button>
+            <button class="quick-action-btn" onclick="sendQuickAction('Budget tips')">Budget tips</button>
+        </div>
+
+        <div class="chat-input-container">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Ask me anything about budgeting..." />
+            <button class="chat-send-btn" id="chatSendBtn" aria-label="Send message">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script type="module" src="../js/main.js"></script>
+    <script src="../js/expenses.js"></script>
+</body>
+</html>
